@@ -18,7 +18,7 @@ const Navbar = () => {
                 direction='row'
                 alignItems="center"
                 p={2}
-                sx={{ position: 'fixed', backgroundColor: '#002a5c', top: 0, left: 0, right: 0, justifyContent: 'space-between', zIndex: 9999 }}
+                sx={{ position: 'fixed', backgroundColor: '#002a5c', top: 0, left: 0, right: 0, justifyContent: 'space-between', zIndex: 2 }}
             >
                 <div style={{ display: 'flex', alignItem: 'center', justifyContent: 'center' }}>
                     <Link to='/'>

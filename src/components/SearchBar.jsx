@@ -3,9 +3,10 @@ import { Search } from '@mui/icons-material'
 import { IconButton, Paper, Stack } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person';
 import { useMediaQuery } from 'react-responsive';
+import { ToastContainer, toast } from 'react-toastify';
+
 import rs from './data.json'
 import Filter from './Filter';
-
 
 const SearchBar = (props) => {
     const { setIsDisplayTable,
@@ -47,15 +48,15 @@ const SearchBar = (props) => {
                 setDanhSachMonHoc([...data])
                 setIsDisplayTable(true);
             } else {
-                console.log("Ma so sinh vien k chinh xac")
+                toast.error("Mã số sinh viên nhập không chính xác")
             }
             // } else {
-            // console.log("Mao so sinh vien k ton tai")
+            // toast.info("Mã số sinh viên không tồn tại")
             // }
 
             // })
         } else {
-            console.log("Vui lòng nhập mã sinh viên trước khi tìm kiếm!!!")
+           toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
         }
     }
 

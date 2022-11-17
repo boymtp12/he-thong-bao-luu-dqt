@@ -18,7 +18,7 @@ const Navbar = () => {
                 direction='row'
                 alignItems="center"
                 p={2}
-                sx={{ position: 'fixed', backgroundColor: '#002a5c', top: 0, left: 0, right: 0, justifyContent: 'space-between' }}
+                sx={{ position: 'fixed', backgroundColor: '#002a5c', top: 0, left: 0, right: 0, justifyContent: 'space-between', zIndex: 9999 }}
             >
                 <div style={{ display: 'flex', alignItem: 'center', justifyContent: 'center' }}>
                     <Link to='/'>
@@ -29,7 +29,7 @@ const Navbar = () => {
                         {isDesktopOrLaptop && <Typography sx={{ fontWeight: 'bold' }}>Hanoi University of Civil Engineering</Typography>}
                     </div>
                 </div>
-                <Typography sx={{ fontSize: '1.2em', color: 'yellow' }}>Hệ thống đăng ký bảo lưu điểm quá trình</Typography>
+                <Typography sx={{ fontSize: '1.1em', color: 'yellow' }}>HỆ THỐNG ĐĂNG KÝ BẢO LƯU ĐIỂM QUÁ TRÌNH</Typography>
             </Stack >
         </Box>
     )

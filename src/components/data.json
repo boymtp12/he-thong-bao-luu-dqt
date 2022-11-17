@@ -1,0 +1,248 @@
+{
+    "message": "SUCCESS",
+    "code": 200,
+    "status": 1,
+    "result": {
+      "mssv": 21321321,
+      "compare": [
+        {
+          "year": 2019,
+          "hk": 1,
+          "semester": [
+            {
+              "info_old": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "123",
+                "score_4": "1.5"
+              },
+              "info_new": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "123",
+                "score_4": "1.5"
+              },
+              "is_compare": true
+            },
+            {
+              "info_old": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Kỹ thuật truyền thông",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "xzczxc",
+                "score_4": "1.5"
+              },
+              "info_new": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Kỹ thuật truyền thông",
+                "group_code": "LOPNV22",
+                "mmh": "zxczx",
+                "score_string": "D+",
+                "score_4": "1.5"
+              },
+              "is_compare": true
+            }
+          ],
+          "semester_summary": {
+            "info_old": {
+              "year": "2019",
+              "hk": "1",
+              "summary": " 4.83",
+              "score_4": " 1.46",
+              "summary_all": " 5.58",
+              "score_4_all": " 1.77",
+              "ttck": 10,
+              "ttc": 100
+            },
+            "info_new": {
+              "year": "2019",
+              "hk": "1",
+              "summary": " 4.83",
+              "score_4": " 1.46",
+              "summary_all": " 5.58",
+              "score_4_all": " 1.77",
+              "ttck": 10,
+              "ttc": 100
+            },
+            "is_compare": true
+          }
+        },
+        {
+          "year": 2019,
+          "hk": 2,
+          "semester": [
+            {
+              "info_old": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "123",
+                "score_4": "1.5"
+              },
+              "info_new": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "123",
+                "score_4": "1.5"
+              },
+              "is_compare": true
+            },
+            {
+              "info_old": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "xzczxc",
+                "score_4": "1.5"
+              },
+              "info_new": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "mmh": "zxczx",
+                "score_string": "D+",
+                "score_4": "1.5"
+              },
+              "is_compare": true
+            }
+          ],
+          "semester_summary": {
+            "info_old": {
+              "year": "2019",
+              "hk": "1",
+              "summary": " 4.83",
+              "score_4": " 1.46",
+              "summary_all": " 5.58",
+              "score_4_all": " 1.77",
+              "ttck": 10,
+              "ttc": 100
+            },
+            "info_new": {
+              "year": "2019",
+              "hk": "1",
+              "summary": " 4.83",
+              "score_4": " 1.46",
+              "summary_all": " 5.58",
+              "score_4_all": " 1.77",
+              "ttck": 10,
+              "ttc": 100
+            },
+            "is_compare": false
+          }
+        },
+        {
+          "year": 2020,
+          "hk": 1,
+          "semester": [
+            {
+              "info_old": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "123",
+                "score_4": "1.5"
+              },
+              "info_new": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "123",
+                "score_4": "1.5"
+              },
+              "is_compare": true
+            },
+            {
+              "info_old": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "score_string": "D+",
+                "mmh": "xzczxc",
+                "score_4": "1.5"
+              },
+              "info_new": {
+                "qt": " 5.3",
+                "kt": " 5.0",
+                "tc": "2.0",
+                "summary": "5.3",
+                "name_subject": "Giao thông và đường đô thị",
+                "group_code": "LOPNV22",
+                "mmh": "zxczx",
+                "score_string": "D+",
+                "score_4": "1.5"
+              },
+              "is_compare": true
+            }
+          ],
+          "semester_summary": {
+            "info_old": {
+              "year": "2019",
+              "hk": "1",
+              "summary": " 4.83",
+              "score_4": " 1.46",
+              "summary_all": " 5.58",
+              "score_4_all": " 1.77",
+              "ttck": 10,
+              "ttc": 100
+            },
+            "info_new": {
+              "year": "2019",
+              "hk": "1",
+              "summary": " 4.83",
+              "score_4": " 1.46",
+              "summary_all": " 5.58",
+              "score_4_all": " 1.77",
+              "ttck": 10,
+              "ttc": 100
+            },
+            "is_compare": false
+          }
+        }
+      ]
+    }
+  }
+  

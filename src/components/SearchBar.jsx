@@ -3,13 +3,17 @@ import { Search } from '@mui/icons-material'
 import { IconButton, Paper, Stack } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person';
 import { useMediaQuery } from 'react-responsive';
-import data from './data.json'
+import rs from './data.json'
 import Filter from './Filter';
 
+
 const SearchBar = (props) => {
+    const { setIsDisplayTable,
+        danhSachMonHoc,
+        setDanhSachMonHoc,
+    } = props
     const [maSo, setMaSo] = useState('');
 
-    const { setIsDisplayTable } = props
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width: 1224px)'
     })
@@ -21,38 +25,47 @@ const SearchBar = (props) => {
 
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         const options = {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
         }
         if (maSo) {
-            // fetch("./lib/data.json", options).then(response => {
-            //     console.log(response)
-            //     return response.json()
-            // })
-            //     .then(rs => {
-            //         console.log(rs);
+            let checkMaSoSv1;
+            // fetch("./data.json", options)
+            //     .then(response => {
+            //         console.log(response)
+            //         return response.json();
             //     })
-            e.preventDefault();
-            setIsDisplayTable(true);
-            console.log(maSo)
+            //     .then(rs => {
+            //     if(Boolean(rs) === true) {
+            let data = rs.result.compare;
+            checkMaSoSv1 = rs.result.mssv
+            if (maSo === checkMaSoSv1) {
+                setDanhSachMonHoc([...data])
+                setIsDisplayTable(true);
+            } else {
+                console.log("Ma so sinh vien k chinh xac")
+            }
+            // } else {
+            // console.log("Mao so sinh vien k ton tai")
+            // }
+
+            // })
         } else {
-            e.preventDefault();
             console.log("Vui lòng nhập mã sinh viên trước khi tìm kiếm!!!")
         }
     }
 
+
     useEffect(() => {
-        if (maSo.length === 0) {
-            setIsDisplayTable(false);
-        }
+        setIsDisplayTable(false);
     }, [maSo])
     return (
         <Stack direction="row" alignItems="center">
-            <Filter/>
+            <Filter />
             <Paper
                 component="form"
                 onSubmit={(e) => { handleSubmit(e) }}

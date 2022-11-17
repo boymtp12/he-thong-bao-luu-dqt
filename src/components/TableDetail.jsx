@@ -13,7 +13,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import data from './data.json'
 
 const TableDetail = (props) => {
-
+    const { danhSachMonHoc } = props;
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.black,
@@ -38,14 +38,13 @@ const TableDetail = (props) => {
         return { name, calories, fat, carbs, protein };
     }
 
-    const rows = data;
-    console.log(rows.result.compare)
+    const rows = danhSachMonHoc;
     return (
         <div style={{ margin: '64px 0' }}>
             {
-                rows.result?.compare?.map((row, index1) => (
-                    <div>
-                        <Box sx={{ marginTop: '32px' }}><Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>HỌC KỲ {row.hk} NĂM {row.year} - {row.year + 1}</Typography></Box>
+                rows.map((row, index1) => (
+                    <div key={index1}>
+                        <Box sx={{ marginTop: '32px' }}><Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>HỌC KỲ {row.hk} NĂM {row.year} - {Number(row.year) + 1}</Typography></Box>
                         <TableContainer component={Paper} sx={{ marginTop: '16px' }}>
                             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                                 <TableHead>
@@ -109,43 +108,43 @@ const TableDetail = (props) => {
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 10/100: </Typography>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary.info_old.summary}</Typography>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary.info_old.summary}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.summary}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.summary}</Typography>
                                     </div>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 4: </Typography>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary.info_old.score_4}</Typography>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary.info_old.score_4}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.score_4}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.score_4}</Typography>
                                     </div>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình tích lũy: </Typography>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary.info_old.summary_all}</Typography>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary.info_old.summary_all}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.summary_all}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.summary_all}</Typography>
                                     </div>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình tích lũy(hệ 4): </Typography>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary.info_old.score_4_all}</Typography>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary.info_old.score_4_all}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.score_4_all}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.score_4_all}</Typography>
                                     </div>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Số tín chỉ đạt: </Typography>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary.info_old.ttck}</Typography>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary.info_old.ttck}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.tcck}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.tcck}</Typography>
                                     </div>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Số tín chỉ tích lũy: </Typography>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary.info_old.ttc}</Typography>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary.info_old.ttc}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.tcc}</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.tcc}</Typography>
                                     </div>
                                 </Box>
                             </Stack>

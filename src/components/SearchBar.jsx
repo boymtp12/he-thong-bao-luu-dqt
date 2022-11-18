@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useMediaQuery } from 'react-responsive';
 import { ToastContainer, toast } from 'react-toastify';
 
-import rs from './data.json'
+// import rs from './data.json'
 import Filter from './Filter';
 
 const SearchBar = (props) => {
@@ -13,6 +13,7 @@ const SearchBar = (props) => {
         danhSachMonHoc,
         setDanhSachMonHoc,
     } = props
+
     const [maSo, setMaSo] = useState('');
 
     const isDesktopOrLaptop = useMediaQuery({
@@ -35,28 +36,28 @@ const SearchBar = (props) => {
         }
         if (maSo) {
             let checkMaSoSv1;
-            // fetch("./data.json", options)
-            //     .then(response => {
-            //         console.log(response)
-            //         return response.json();
-            //     })
-            //     .then(rs => {
-            //     if(Boolean(rs) === true) {
-            let data = rs.result.compare;
-            checkMaSoSv1 = rs.result.mssv
-            if (maSo === checkMaSoSv1) {
-                setDanhSachMonHoc([...data])
-                setIsDisplayTable(true);
-            } else {
-                toast.error("Mã số sinh viên nhập không chính xác")
-            }
-            // } else {
-            // toast.info("Mã số sinh viên không tồn tại")
-            // }
+            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${maSo}&type=2`, options)
+                .then(response => {
+                    console.log(response)
+                    return response.json();
+                })
+                .then(rs => {
+                    if (Boolean(rs) === true) {
+                        let data = rs.result.compare;
+                        checkMaSoSv1 = rs.result.mssv
+                        if (maSo === checkMaSoSv1) {
+                            setDanhSachMonHoc([...data])
+                            setIsDisplayTable(true);
+                        } else {
+                            toast.error("Mã số sinh viên nhập không chính xác")
+                        }
+                    } else {
+                        toast.info("Mã số sinh viên không tồn tại")
+                    }
 
-            // })
+                })
         } else {
-           toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
+            toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
         }
     }
 
@@ -66,7 +67,7 @@ const SearchBar = (props) => {
     }, [maSo])
     return (
         <Stack direction="row" alignItems="center">
-            <Filter />
+            <Filter setIsDisplayTable={setIsDisplayTable} setDanhSachMonHoc={setDanhSachMonHoc} maSo={maSo}/>
             <Paper
                 component="form"
                 onSubmit={(e) => { handleSubmit(e) }}

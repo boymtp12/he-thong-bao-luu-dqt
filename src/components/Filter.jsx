@@ -15,7 +15,7 @@ export default function Filter(props) {
 
     const options = ["All", "Score", "Tổng kết"]
 
-    const handleClose = (e) => {
+    const handleSubmit = (e) => {
         let checkMaSoSv1;
         let value_filter = e.target.value
         const options = {
@@ -53,6 +53,11 @@ export default function Filter(props) {
         setAnchorEl(null);
     };
 
+    const handleClose = () => {
+        setAnchorEl(null);
+
+    }
+
     return (
         <div style={{ marginRight: '16px' }}>
             <Button
@@ -77,7 +82,7 @@ export default function Filter(props) {
             >
                 {options.map((item, index) => {
                     let type_filter = `type-filter-${index}`
-                    return (<MenuItem onClick={e => handleClose(e)} key={item} sx={{ width: '200px' }} className={type_filter} value={index}>{item}</MenuItem>)
+                    return (<MenuItem onClick={e => handleSubmit(e)} key={item} sx={{ width: '200px' }} className={type_filter} value={index}>{item}</MenuItem>)
                 })}
             </Menu>
         </div>

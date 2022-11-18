@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useMediaQuery } from 'react-responsive';
 import { ToastContainer, toast } from 'react-toastify';
 
-// import rs from './data.json'
+import rs from './data.json'
 import Filter from './Filter';
 
 const SearchBar = (props) => {
@@ -28,6 +28,7 @@ const SearchBar = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let checkMaSoSv1;
         const options = {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
@@ -35,7 +36,6 @@ const SearchBar = (props) => {
             },
         }
         if (maSo) {
-            let checkMaSoSv1;
             fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${maSo}&type=2`, options)
                 .then(response => {
                     console.log(response)
@@ -67,7 +67,7 @@ const SearchBar = (props) => {
     }, [maSo])
     return (
         <Stack direction="row" alignItems="center">
-            <Filter setIsDisplayTable={setIsDisplayTable} setDanhSachMonHoc={setDanhSachMonHoc} maSo={maSo}/>
+            <Filter setIsDisplayTable={setIsDisplayTable} setDanhSachMonHoc={setDanhSachMonHoc} maSo={maSo} />
             <Paper
                 component="form"
                 onSubmit={(e) => { handleSubmit(e) }}

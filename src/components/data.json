@@ -1,9 +1,27 @@
+
 {
   "message": "SUCCESS",
   "code": 200,
   "status": 1,
   "result": {
     "mssv": "207060",
+    "info":{
+      "old":{
+        "name":"Trần Văn A",
+        "birthday":"2022-10-20"
+      },
+      "new":{
+        "name":"Trần Văn A",
+        "birthday":"2022-10-20"
+      },
+      "is_compare":true
+    },
+    "overview":{
+      "total_subjects":123,
+      "difference_subjects":10,
+      "total_hk":10,
+      "difference_hk":3
+    },
     "compare": [
       {
         "year": "2016",

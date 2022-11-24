@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 export default function Filter(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { setIsDisplayTable, setDanhSachMonHoc, maSo } = props;
+    const { setIsDisplayTable, setDataInfoStudent, maSo } = props;
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -37,7 +37,7 @@ export default function Filter(props) {
                         let data = rs.result.compare;
                         checkMaSoSv1 = rs.result.mssv
                         if (maSo === checkMaSoSv1) {
-                            setDanhSachMonHoc([...data])
+                            setDataInfoStudent([...data])
                             setIsDisplayTable(true);
                         } else {
                             toast.error("Mã số sinh viên nhập không chính xác")

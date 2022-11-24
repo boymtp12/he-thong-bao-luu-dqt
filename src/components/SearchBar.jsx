@@ -10,8 +10,8 @@ import Filter from './Filter';
 
 const SearchBar = (props) => {
     const { setIsDisplayTable,
-        danhSachMonHoc,
-        setDanhSachMonHoc,
+        dataInfoStudent,
+        setDataInfoStudent,
     } = props
 
     const [maSo, setMaSo] = useState('');
@@ -43,10 +43,10 @@ const SearchBar = (props) => {
                 })
                 .then(rs => {
                     if (Boolean(rs) === true) {
-                        let data = rs.result.compare;
+                        let data = rs.result;
                         checkMaSoSv1 = rs.result.mssv
                         if (maSo === checkMaSoSv1) {
-                            setDanhSachMonHoc([...data])
+                            setDataInfoStudent({ ...data })
                             setIsDisplayTable(true);
                         } else {
                             toast.error("Mã số sinh viên nhập không chính xác")
@@ -67,7 +67,7 @@ const SearchBar = (props) => {
     }, [maSo])
     return (
         <Stack direction="row" alignItems="center">
-            <Filter setIsDisplayTable={setIsDisplayTable} setDanhSachMonHoc={setDanhSachMonHoc} maSo={maSo} />
+            <Filter setIsDisplayTable={setIsDisplayTable} setDataInfoStudent={setDataInfoStudent} maSo={maSo} />
             <Paper
                 component="form"
                 onSubmit={(e) => { handleSubmit(e) }}

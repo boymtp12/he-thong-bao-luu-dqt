@@ -11,9 +11,11 @@ import { Box, Stack, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import data from './data.json'
+import DetailInfo from './DetailInfo';
+import DetailSummary from './DetailSummary';
 
 const TableDetail = (props) => {
-    const { danhSachMonHoc } = props;
+    const { dataInfoStudent } = props;
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.black,
@@ -38,9 +40,13 @@ const TableDetail = (props) => {
         return { name, calories, fat, carbs, protein };
     }
 
-    const rows = danhSachMonHoc;
+    const rows = dataInfoStudent?.compare;
     return (
-        <div style={{ margin: '64px 0' }}>
+        <div style={{ margin: '32px 0' }}>
+            <Stack direction='row' justifyContent='flex-start' sx={{width: '1000px'}}>
+                <DetailInfo dataInfoStudent={dataInfoStudent}/>
+                <DetailSummary dataInfoStudent={dataInfoStudent}/>
+            </Stack>
             {
                 rows.map((row, index1) => (
                     <div key={index1}>
@@ -59,6 +65,7 @@ const TableDetail = (props) => {
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">ĐHP&nbsp;(10)</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Điểm HP&nbsp;(4)</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Điểm HP&nbsp;(Chữ)</StyledTableCell>
+                                        <StyledTableCell sx={{ minWidth: '50px' }} align="left">Status</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Mã MH</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '200px' }} align="left">Tên MH</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Lớp HP</StyledTableCell>
@@ -68,7 +75,6 @@ const TableDetail = (props) => {
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Điểm HP&nbsp;(10)</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Điểm HP&nbsp;(4)</StyledTableCell>
                                         <StyledTableCell sx={{ minWidth: '50px' }} align="left">Điểm HP&nbsp;(Chữ)</StyledTableCell>
-                                        <StyledTableCell sx={{ minWidth: '50px' }} align="left">Status</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -87,6 +93,7 @@ const TableDetail = (props) => {
                                                 <StyledTableCell align="left">{item?.info_old?.summary}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_old?.score_4}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_old?.score_string}</StyledTableCell>
+                                                <StyledTableCell align="left">{row.semester_summary.is_compare ? <CheckCircleIcon color='success' /> : < CancelIcon color='error' />}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.mmh}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.name_subject}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.group_code}</StyledTableCell>
@@ -96,7 +103,6 @@ const TableDetail = (props) => {
                                                 <StyledTableCell align="left">{item?.info_new?.summary}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.score_4}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.score_string}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.semester_summary.is_compare ? <CheckCircleIcon color='success' /> : < CancelIcon color='error' />}</StyledTableCell>
                                             </StyledTableRow>
                                         )
                                     })}
@@ -104,7 +110,7 @@ const TableDetail = (props) => {
                                 </TableBody>
 
                             </Table>
-                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #ccc' }}>
                                 <Stack sx={{ padding: '8px 16px' }}>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
                                         <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 10/100: </Typography>

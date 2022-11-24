@@ -34,7 +34,7 @@ export default function Filter(props) {
                 })
                 .then(rs => {
                     if (Boolean(rs) === true) {
-                        let data = rs.result.compare;
+                        let data = rs.result;
                         checkMaSoSv1 = rs.result.mssv
                         if (maSo === checkMaSoSv1) {
                             setDataInfoStudent({...data})

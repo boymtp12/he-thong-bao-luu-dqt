@@ -37,7 +37,7 @@ export default function Filter(props) {
                         let data = rs.result.compare;
                         checkMaSoSv1 = rs.result.mssv
                         if (maSo === checkMaSoSv1) {
-                            setDataInfoStudent([...data])
+                            setDataInfoStudent({...data})
                             setIsDisplayTable(true);
                         } else {
                             toast.error("Mã số sinh viên nhập không chính xác")

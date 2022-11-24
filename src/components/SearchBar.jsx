@@ -36,7 +36,7 @@ const SearchBar = (props) => {
             },
         }
         if (maSo) {
-            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${maSo}&type=2`, options)
+            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${maSo}&type=0`, options)
                 .then(response => {
                     console.log(response)
                     return response.json();

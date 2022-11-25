@@ -21,16 +21,19 @@ const Home = () => {
             },
         }
 
-        // fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${ma_so_sv}&type=0`, options)
-        //     .then(response => {
-        //         console.log(response)
-        //         return response.json();
-        //     })
-        //     .then(rs => {
-        if (Boolean(rs2) === true) {
-            let data = rs2.result.compare;
-            dispatch(changeDataListStudent([...data]))
-        }
+        fetch(`http://localhost:8088/sinh-vien/get-all?page=0`, options)
+            .then(response => {
+                console.log(response)
+                return response.json();
+            })
+            .then(rs => {
+                if (Boolean(rs2) === true) {
+                    let data = rs2.result.compare;
+                    dispatch(changeDataListStudent([...data]))
+                }
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     React.useEffect(() => {

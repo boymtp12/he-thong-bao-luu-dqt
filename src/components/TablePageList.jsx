@@ -56,7 +56,7 @@ const TablePageList = () => {
             },
         }
         if (mssv) {
-            fetch(`localhost:8088/sinh-vien/get-all?page=0`, options)
+            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${mssv}&type=0`, options)
                 .then(response => {
                     console.log(response)
                     return response.json();

@@ -13,8 +13,8 @@ const DetailSummary = () => {
             <Stack sx={{ padding: '8px 0' }} direction='row' >
                 <Box sx={{ padding: '8px 16px' }}>
                     <Typography sx={{ paddingTop: '8px' }}>Môn học: <span style={{fontWeight: 'bold', margin: '0 8px'}}>{dataOverview?.total_subjects}</span></Typography>
-                    <Typography sx={{ paddingTop: '8px' }}>Học kỳ: <span style={{fontWeight: 'bold', margin: '0 8px'}}>{dataOverview?.difference_subjects}</span></Typography>
-                    <Typography sx={{ paddingTop: '8px' }}>Khác: <span style={{fontWeight: 'bold', margin: '0 8px'}}>{dataOverview?.total_hk}</span></Typography>
+                    <Typography sx={{ paddingTop: '8px' }}>Học kỳ: <span style={{fontWeight: 'bold', margin: '0 8px'}}>{dataOverview?.total_hk}</span></Typography>
+                    <Typography sx={{ paddingTop: '8px' }}>Khác: <span style={{fontWeight: 'bold', margin: '0 8px'}}>{dataOverview?.difference_subjects}</span></Typography>
                     <Typography sx={{ paddingTop: '8px' }}>Khác: <span style={{fontWeight: 'bold', margin: '0 8px'}}>{dataOverview?.difference_hk}</span></Typography>
                 </Box>
             </Stack>

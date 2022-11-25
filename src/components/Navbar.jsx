@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Stack, Typography } from '@mui/material'
 import SearchBar from './SearchBar'
 import { useMediaQuery } from 'react-responsive'
+import MenuNavBar from './MenuNavBar'
 
 const Navbar = () => {
     const isDesktopOrLaptop = useMediaQuery({
@@ -29,7 +30,10 @@ const Navbar = () => {
                         {isDesktopOrLaptop && <Typography sx={{ fontWeight: 'bold' }}>Hanoi University of Civil Engineering</Typography>}
                     </div>
                 </div>
-                <Typography sx={{ fontSize: '1.1em', color: 'yellow' }}>HỆ THỐNG ĐĂNG KÝ BẢO LƯU ĐIỂM QUÁ TRÌNH</Typography>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <Typography sx={{ fontSize: '1.1em', color: 'yellow' }}>HỆ THỐNG ĐĂNG KÝ BẢO LƯU ĐIỂM QUÁ TRÌNH</Typography>
+                    <MenuNavBar />
+                </div>
             </Stack >
         </Box>
     )

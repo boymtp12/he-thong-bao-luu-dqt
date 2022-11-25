@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
+import PageList from './components/PageList';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path='/' exact element={<Home />} />
+          <Route path='/list' exact element={<PageList />} />
         </Routes>
         <Footer />
       </Box>

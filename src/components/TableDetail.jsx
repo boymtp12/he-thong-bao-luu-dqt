@@ -13,9 +13,16 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import data from './data.json'
 import DetailInfo from './DetailInfo';
 import DetailSummary from './DetailSummary';
+import { useDispatch, useSelector } from 'react-redux';
 
-const TableDetail = (props) => {
-    const { dataInfoStudent } = props;
+const TableDetail = () => {
+    const dispatch = useDispatch()
+
+    const ma_so_sv = useSelector(state => state.base.ma_so_sv)
+    const data_student = useSelector(state => state.base.data_student)
+    const is_display_table_detail = useSelector(state => state.base.is_display_table_detail)
+
+
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.black,
@@ -25,6 +32,10 @@ const TableDetail = (props) => {
             fontSize: 14,
         },
     }));
+
+    console.log(ma_so_sv)
+    console.log(data_student)
+    console.log(is_display_table_detail)
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
@@ -40,12 +51,12 @@ const TableDetail = (props) => {
         return { name, calories, fat, carbs, protein };
     }
 
-    const rows = dataInfoStudent?.compare;
+    const rows = data_student?.compare;
     return (
         <div style={{ margin: '32px 0' }}>
-            <Stack direction='row' justifyContent='flex-start' sx={{width: '1000px'}}>
-                <DetailInfo dataInfoStudent={dataInfoStudent}/>
-                <DetailSummary dataInfoStudent={dataInfoStudent}/>
+            <Stack direction='row' justifyContent='flex-start' sx={{ width: '1000px' }}>
+                <DetailInfo/>
+                <DetailSummary/>
             </Stack>
             {
                 rows.map((row, index1) => (
@@ -93,7 +104,7 @@ const TableDetail = (props) => {
                                                 <StyledTableCell align="left">{item?.info_old?.summary}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_old?.score_4}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_old?.score_string}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.semester_summary.is_compare ? <CheckCircleIcon color='success' /> : < CancelIcon color='error' />}</StyledTableCell>
+                                                <StyledTableCell align="left">{item?.is_compare ? <CheckCircleIcon color='success' /> : < CancelIcon color='error' />}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.mmh}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.name_subject}</StyledTableCell>
                                                 <StyledTableCell align="left">{item?.info_new?.group_code}</StyledTableCell>

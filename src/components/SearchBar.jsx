@@ -7,14 +7,16 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import rs from './data.json'
 import Filter from './Filter';
+import { changeDataStudent, changeDisplayTableDetail, changeMaSoSv } from '../reducer_action/BaseReducerAction';
+import { useDispatch, useSelector } from 'react-redux';
 
-const SearchBar = (props) => {
-    const { setIsDisplayTable,
-        dataInfoStudent,
-        setDataInfoStudent,
-    } = props
+const SearchBar = () => {
+    const dispatch = useDispatch();
 
-    const [maSo, setMaSo] = useState('');
+    const ma_so_sv = useSelector(state => state.base.ma_so_sv)
+    const data_student = useSelector(state => state.base.data_student)
+    const is_display_table_detail = useSelector(state => state.base.is_display_table_detail)
+
 
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width: 1224px)'
@@ -35,39 +37,40 @@ const SearchBar = (props) => {
                 'Content-Type': 'application/json'
             },
         }
-        if (maSo) {
-            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${maSo}&type=0`, options)
-                .then(response => {
-                    console.log(response)
-                    return response.json();
-                })
-                .then(rs => {
-                    if (Boolean(rs) === true) {
-                        let data = rs.result;
-                        checkMaSoSv1 = rs.result.mssv
-                        if (maSo === checkMaSoSv1) {
-                            setDataInfoStudent({ ...data })
-                            setIsDisplayTable(true);
-                        } else {
-                            toast.error("Mã số sinh viên nhập không chính xác")
-                        }
-                    } else {
-                        toast.info("Mã số sinh viên không tồn tại")
-                    }
+      
+        if (ma_so_sv) {
+            // fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${ma_so_sv}&type=0`, options)
+            //     .then(response => {
+            //         console.log(response)
+            //         return response.json();
+            //     })
+            //     .then(rs => {
+            if (Boolean(rs) === true) {
+                let data = rs.result;
+                checkMaSoSv1 = rs.result.mssv
+                if (ma_so_sv === checkMaSoSv1) {
+                    dispatch(changeDataStudent({ ...data }))
+                    dispatch(changeDisplayTableDetail(true))
+                } else {
+                    toast.error("Mã số sinh viên nhập không chính xác")
+                }
+            } else {
+                toast.info("Mã số sinh viên không tồn tại")
+            }
 
-                })
-        } else {
-            toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
+            //         })
+            // } else {
+            //     toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
+            // }
         }
     }
 
-
-    useEffect(() => {
-        setIsDisplayTable(false);
-    }, [maSo])
+    // useEffect(() => {
+    //     dispatch(changeDisplayTableDetail(false))
+    // }, [ma_so_sv])
     return (
         <Stack direction="row" alignItems="center">
-            <Filter setIsDisplayTable={setIsDisplayTable} setDataInfoStudent={setDataInfoStudent} maSo={maSo} />
+            <Filter />
             <Paper
                 component="form"
                 onSubmit={(e) => { handleSubmit(e) }}
@@ -88,8 +91,8 @@ const SearchBar = (props) => {
                     <input
                         className='search-bar'
                         placeholder='Mã số sinh viên *'
-                        value={maSo}
-                        onChange={e => setMaSo(e.target.value)}
+                        value={ma_so_sv}
+                        onChange={e => dispatch(changeMaSoSv(e.target.value))}
                         style={{ border: 'none', outline: 'none', padding: '4px 8px', fontWeight: 'bold', color: '#696969' }}
                     />
                 </div>

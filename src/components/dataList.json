@@ -1,0 +1,23 @@
+{
+    "message": "SUCCESS",
+    "code": 200,
+    "status": 1,
+    "result": {
+        "compare":[
+          {
+            "mssv":"59463",
+            "name":"Đặng Như Hải",
+            "is_compare": false
+          }, {
+            "mssv":"59466",
+            "name":"Đinh Ngọc Hải",
+            "is_compare": false
+          }
+        ],
+      "page":0,
+      "size":30,
+      "start_page":0,
+      "end_page":30,
+      "total":100
+    }
+}

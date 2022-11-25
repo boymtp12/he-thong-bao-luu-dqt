@@ -4,10 +4,15 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SortIcon from '@mui/icons-material/Sort';
 import { toast } from 'react-toastify';
+import { changeDataStudent, changeDisplayTableDetail } from '../reducer_action/BaseReducerAction';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function Filter(props) {
+export default function Filter() {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { setIsDisplayTable, setDataInfoStudent, maSo } = props;
+
+    const dispatch = useDispatch();
+    const ma_so_sv = useSelector(state => state.base.ma_so_sv)
+   
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -24,10 +29,10 @@ export default function Filter(props) {
                 'Content-Type': 'application/json'
             },
         }
-        console.log(maSo)
+        console.log(ma_so_sv)
         console.log(value_filter)
-        if (maSo) {
-            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${maSo}&type=${value_filter}`, options)
+        if (ma_so_sv) {
+            fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${ma_so_sv}&type=${value_filter}`, options)
                 .then(response => {
                     console.log(response)
                     return response.json();
@@ -36,9 +41,9 @@ export default function Filter(props) {
                     if (Boolean(rs) === true) {
                         let data = rs.result;
                         checkMaSoSv1 = rs.result.mssv
-                        if (maSo === checkMaSoSv1) {
-                            setDataInfoStudent({...data})
-                            setIsDisplayTable(true);
+                        if (ma_so_sv === checkMaSoSv1) {
+                            dispatch(changeDataStudent({...data}))
+                            dispatch(changeDisplayTableDetail(true))
                         } else {
                             toast.error("Mã số sinh viên nhập không chính xác")
                         }
@@ -55,7 +60,6 @@ export default function Filter(props) {
 
     const handleClose = () => {
         setAnchorEl(null);
-
     }
 
     return (

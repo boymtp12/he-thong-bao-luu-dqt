@@ -56,32 +56,31 @@ const TablePageList = () => {
             },
         }
         if (mssv) {
-            // fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${mssv}&type=0`, options)
-            //     .then(response => {
-            //         console.log(response)
-            //         return response.json();
-            //     })
-            //     .then(rs => {
-            if (Boolean(rs) === true) {
-                let data = rs.result;
-                checkMaSoSv1 = rs.result.mssv
-                console.log(checkMaSoSv1)
-                dispatch(changeMaSoSv(mssv))
-                if (mssv === checkMaSoSv1) {
-                    navigate('/')
-                    dispatch(changeDataStudent({ ...data }));
-                    dispatch(changeDisplayTableDetail(true));
-                } else {
-                    toast.error("Mã số sinh viên nhập không chính xác")
-                }
-            } else {
-                toast.info("Mã số sinh viên không tồn tại")
-            }
+            fetch(`localhost:8088/sinh-vien/get-all?page=0`, options)
+                .then(response => {
+                    console.log(response)
+                    return response.json();
+                })
+                .then(rs => {
+                    if (Boolean(rs) === true) {
+                        let data = rs.result;
+                        checkMaSoSv1 = rs.result.mssv
+                        console.log(checkMaSoSv1)
+                        dispatch(changeMaSoSv(mssv))
+                        if (mssv === checkMaSoSv1) {
+                            navigate('/')
+                            dispatch(changeDataStudent({ ...data }));
+                            dispatch(changeDisplayTableDetail(true));
+                        } else {
+                            toast.error("Mã số sinh viên nhập không chính xác")
+                        }
+                    } else {
+                        toast.info("Mã số sinh viên không tồn tại")
+                    }
 
-            //         })
-            // } else {
-            //     toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
-            // }
+                })
+        } else {
+            toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")
         }
     }
 

@@ -3,9 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Box } from '@mui/material';
 import { Home, Navbar } from './components'
 import Footer from './components/Footer';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
 import PageList from './components/PageList';
 
 const App = () => {
@@ -27,6 +26,7 @@ const App = () => {
       <Box>
         {/* Same as */}
         <Navbar />
+        
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/list' exact element={<PageList />} />

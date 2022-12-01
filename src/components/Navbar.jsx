@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, LinearProgress, Stack, Typography } from '@mui/material'
 import SearchBar from './SearchBar'
 import { useMediaQuery } from 'react-responsive'
 import MenuNavBar from './MenuNavBar'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+    const is_progress = useSelector(state => state.base.is_progress)
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width: 1224px)'
     })
@@ -30,11 +32,12 @@ const Navbar = () => {
                         {isDesktopOrLaptop && <Typography sx={{ fontWeight: 'bold' }}>Hanoi University of Civil Engineering</Typography>}
                     </div>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Typography sx={{ fontSize: '1.1em', color: 'yellow' }}>HỆ THỐNG ĐĂNG KÝ BẢO LƯU ĐIỂM QUÁ TRÌNH</Typography>
                     <MenuNavBar />
                 </div>
             </Stack >
+            {is_progress && <LinearProgress sx={{position: 'fixed', top: '105px', left: '0', right: 0, zIndex: '9999'}} />}
         </Box>
     )
 }

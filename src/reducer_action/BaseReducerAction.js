@@ -26,3 +26,12 @@ export const changeDataListStudent = e => {
   }
 }
 
+export const changeStatusProgress = e => {
+  return {
+    type: 'CHANGE_STATUS_PROGRESS',
+    is_progress: e
+  }
+}
+
+
+

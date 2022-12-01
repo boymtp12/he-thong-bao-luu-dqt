@@ -45,7 +45,7 @@ const SearchBar = () => {
                     return response.json();
                 })
                 .then(rs => {
-                    if (Boolean(rs) === true) {
+                    if (rs.code === 200) {
                         let data = rs.result;
                         checkMaSoSv1 = rs.result.mssv
                         if (ma_so_sv === checkMaSoSv1) {
@@ -55,7 +55,7 @@ const SearchBar = () => {
                             toast.error("Mã số sinh viên nhập không chính xác")
                         }
                     } else {
-                        toast.error("Mã số sinh viên không tồn tại")
+                        toast.info("Mã số sinh viên không tồn tại")
                     }
 
                 })

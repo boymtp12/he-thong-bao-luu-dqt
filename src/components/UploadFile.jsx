@@ -9,42 +9,21 @@ import { useDispatch } from 'react-redux';
 const UploadFile = () => {
     const dispatch = useDispatch();
     const [isUploading, setUploading] = useState(false);
+    const [file, setFile] = useState();
 
-    const fileHandler = event => {
-        let fileObj = event.target.files[0]
-        // setUploading(true);
+    const fileHandler = async event => {
+        const fileObj = event.target.files[0]
+        // setFile(fileObj)
+        const formData = new FormData();
+        formData.append('File', fileObj);
 
-        // ExcelRenderer(fileObj, async (err, resp) => {
-        //     resp.rows.splice(0, 1)
-        //     let data = [...resp.rows.filter(item => item.length !== 0)]
-        //     console.log(data);
-        //     if (err) {
-        //         setUploading(false);
-        //         console.log(err)
-        //     } else {
-        //         let arr = []
-        //         data.map(item => {
-        //             arr.push({
-        //                 ma_sv: item[1] ? item[1] : '',
-        //                 ten: item[2] ? item[2] : '',
-        //                 lop: item[3] ? item[3] : '',
-        //                 khoa: item[4] ? item[4] : '',
-        //                 ket_qua: item[5] ? item[5] : '',
-        //                 ngay_thi: item[6] ? item[6] : '',
-        //                 ghi_chu: item[7] ? item[7] : '',
-        //                 doi_tuong: item[8] ? item[8] : ''
-        //             })
-        //         })
-        //         console.log(arr);
-        //     }
-        // })
         dispatch(changeStatusProgress(true))
         const options = {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(fileObj)
+            body: JSON.stringify(formData)
         }
         fetch(`http://localhost:8088/sinh-vien/compare-file`, options)
             .then(response => {
@@ -61,6 +40,12 @@ const UploadFile = () => {
                 dispatch(changeStatusProgress(false))
             })
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+    }
+
     return (
         <label htmlFor='uploadFile' style={{ marginRight: '10px' }}>
             <span style={{ borderRadius: '5px', background: 'green', padding: '12px', color: '#fff', cursor: 'pointer', fontWeight: 'bold' }}>
@@ -74,6 +59,7 @@ const UploadFile = () => {
                 onChange={e => fileHandler(e)}
                 style={{ display: 'none' }}
             />
+            {/* <Button onClick={(e) => handleSubmit(e)}>Submit</Button> */}
         </label>
 
     )

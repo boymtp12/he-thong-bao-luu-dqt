@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import rs from './data.json'
 import Filter from './Filter';
-import { changeDataStudent, changeDisplayTableDetail, changeMaSoSv } from '../reducer_action/BaseReducerAction';
+import { changeDataStudent, changeDisplayTableDetail, changeMaSoSv, changeStatusProgress } from '../reducer_action/BaseReducerAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SearchBar = () => {
@@ -37,8 +37,8 @@ const SearchBar = () => {
                 'Content-Type': 'application/json'
             },
         }
-
         if (ma_so_sv) {
+            dispatch(changeStatusProgress(true))
             fetch(`http://localhost:8088/sinh-vien/is-compare?mssv=${ma_so_sv}&type=0`, options)
                 .then(response => {
                     console.log(response)
@@ -55,9 +55,15 @@ const SearchBar = () => {
                             toast.error("Mã số sinh viên nhập không chính xác")
                         }
                     } else {
-                        toast.info("Mã số sinh viên không tồn tại")
+                        toast.error("Mã số sinh viên không tồn tại")
                     }
 
+                })
+                .catch(err => {
+                    toast.info("Mã số sinh viên không tồn tại")
+                })
+                .finally(() => {
+                    dispatch(changeStatusProgress(false))
                 })
         } else {
             toast.warning("Vui lòng nhập mã sinh viên trước khi tìm kiếm")

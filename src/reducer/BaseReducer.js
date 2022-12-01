@@ -3,6 +3,7 @@ const initialState = {
     data_student: {},
     is_display_table_detail: null,
     data_list_student: [],
+    is_progress: null
 }
 
 const BaseReducer = (state = initialState, action) => {
@@ -29,6 +30,12 @@ const BaseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data_list_student: action.data_list_student
+            }
+        }
+        case 'CHANGE_STATUS_PROGRESS': {
+            return {
+                ...state,
+                is_progress: action.is_progress
             }
         }
         default: {

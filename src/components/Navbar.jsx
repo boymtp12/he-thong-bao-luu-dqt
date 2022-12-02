@@ -4,7 +4,9 @@ import { Box, LinearProgress, Stack, Typography } from '@mui/material'
 import SearchBar from './SearchBar'
 import { useMediaQuery } from 'react-responsive'
 import MenuNavBar from './MenuNavBar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeDataListStudent } from '../reducer_action/BaseReducerAction'
+import rs2 from './dataList.json'
 
 const Navbar = () => {
     const is_progress = useSelector(state => state.base.is_progress)
@@ -15,6 +17,8 @@ const Navbar = () => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
     const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
+
+    
     return (
         <Box>
             < Stack
@@ -37,7 +41,7 @@ const Navbar = () => {
                     <MenuNavBar />
                 </div>
             </Stack >
-            {is_progress && <LinearProgress sx={{position: 'fixed', top: '105px', left: '0', right: 0, zIndex: '9999'}} />}
+            {is_progress && <LinearProgress sx={{ position: 'fixed', top: '105px', left: '0', right: 0, zIndex: '9999' }} />}
         </Box>
     )
 }

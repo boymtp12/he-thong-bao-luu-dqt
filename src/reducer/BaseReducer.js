@@ -2,7 +2,7 @@ const initialState = {
     ma_so_sv: '',
     data_student: {},
     is_display_table_detail: null,
-    data_list_student: [],
+    data_list_student: {},
     is_progress: null
 }
 

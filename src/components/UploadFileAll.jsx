@@ -35,11 +35,7 @@ const UploadFileAll = () => {
             })
     }
     return (
-        <span style={{ borderRadius: '5px', background: 'green', padding: '12px', color: '#fff', cursor: 'pointer', fontWeight: 'bold' }} onClick={e => handleSubmit(e)}>
-            All
-        </span>
-
-
+        <Button variant="outlined">All</Button>
     )
 }
 

@@ -13,10 +13,11 @@ const UploadFile = () => {
 
     const fileHandler = async event => {
         const fileObj = event.target.files[0]
-        // setFile(fileObj)
+        setUploading(true);
         const formData = new FormData();
         formData.append('File', fileObj);
 
+        console.log(formData)
         dispatch(changeStatusProgress(true))
         const options = {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -38,6 +39,7 @@ const UploadFile = () => {
             })
             .finally(() => {
                 dispatch(changeStatusProgress(false))
+                setUploading(false);
             })
     }
 
@@ -48,7 +50,7 @@ const UploadFile = () => {
 
     return (
         <label htmlFor='uploadFile' style={{ marginRight: '10px' }}>
-            <span style={{ borderRadius: '5px', background: 'green', padding: '12px', color: '#fff', cursor: 'pointer', fontWeight: 'bold' }}>
+            <span style={{ borderRadius: '5px', background: 'green', padding: '9px', color: '#fff', cursor: 'pointer', fontWeight: 'bold' }}>
                 Upload file
             </span>
             {/* <span className='btn btn-primary fw-bolder' style={{ fontSize: '14px', background: 'blue', border: '1px solid blue' }}>Upload file</span> */}

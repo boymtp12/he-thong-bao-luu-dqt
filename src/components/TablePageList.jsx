@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 import rs from './data.json'
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,67 +25,9 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-function TablePaginationActions(props) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
-
-    const handleFirstPageButtonClick = (event) => {
-        onPageChange(event, 0);
-    };
-
-    const handleBackButtonClick = (event) => {
-        onPageChange(event, page - 1);
-    };
-
-    const handleNextButtonClick = (event) => {
-        onPageChange(event, page + 1);
-    };
-
-    const handleLastPageButtonClick = (event) => {
-        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
-
-    return (
-        <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-            <IconButton
-                onClick={handleFirstPageButtonClick}
-                disabled={page === 0}
-                aria-label="first page"
-            >
-                {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-            </IconButton>
-            <IconButton
-                onClick={handleBackButtonClick}
-                disabled={page === 0}
-                aria-label="previous page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            </IconButton>
-            <IconButton
-                onClick={handleNextButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="next page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </IconButton>
-            <IconButton
-                onClick={handleLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="last page"
-            >
-                {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-            </IconButton>
-        </Box>
-    );
-}
-
-TablePaginationActions.propTypes = {
-    count: PropTypes.number.isRequired,
-    onPageChange: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired,
-    rowsPerPage: PropTypes.number.isRequired,
-};
 
 
 const TablePageList = () => {
@@ -96,21 +38,11 @@ const TablePageList = () => {
     const data_student = useSelector(state => state.base.data_student)
     const is_display_table_detail = useSelector(state => state.base.is_display_table_detail)
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [page, setPage] = React.useState(data_list_student.page);
 
+    console.log(data_list_student)
+    const compare_list_student = data_list_student?.compare;
     // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data_list_student.length) : 0;
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -176,13 +108,47 @@ const TablePageList = () => {
         }
     }
     // }
+    const getListStudent = (page) => {
+        const options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+        dispatch(changeStatusProgress(true))
+        fetch(`http://localhost:8088/sinh-vien/get-all?page=${page}`, options)
+            .then(response => {
+                console.log(response)
+                return response.json();
+            })
+            .then(rs2 => {
+                if (Boolean(rs2) === true) {
+                    let data = rs2.result.compare;
+                    dispatch(changeDataListStudent([...data]))
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+            .finally(() => {
+                dispatch(changeStatusProgress(false))
+            })
+    }
+    const handlePrevPage = () => {
+        setPage(prev => prev - 1)
+        getListStudent(page - 1)
+    }
+
+    const handleNextPage = () => {
+        setPage(prev => prev + 1)
+        getListStudent(page + 1)
+    }
 
 
     return (
         <Box sx={{ margin: '0 auto' }}>
             <Box sx={{ marginTop: '32px' }}><Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>DANH SÁCH SO SÁNH</Typography>
             </Box>
-            <TableContainer component={Paper} sx={{ marginTop: '16px', width: '1200px'}}>
+            <TableContainer component={Paper} sx={{ marginTop: '16px', width: '1200px' }}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table pagination ">
                     <TableHead>
                         <TableRow>
@@ -193,50 +159,39 @@ const TablePageList = () => {
                     </TableHead>
                     <TableBody>
                         {
-                            (rowsPerPage > 0
-                                ? data_list_student.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : data_list_student
-                            ).map((item, index) => {
-                                return (
-                                    < StyledTableRow key={index} sx={{ cursor: 'pointer' }} onClick={() => handleFindStudentByMssv("59463")} >
-                                        <StyledTableCell component="th" scope="row">
-                                            {item.mssv}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left">{item.name}</StyledTableCell>
-                                        <StyledTableCell align="left">{item.is_compare ? <CheckCircleIcon color='success' /> : <CancelIcon color='error' />}</StyledTableCell>
-                                    </StyledTableRow>
-                                )
-                            })
+                            !compare_list_student ? < StyledTableRow  >
+                                None
+                            </StyledTableRow> : compare_list_student
+                                .map((item, index) => {
+                                    return (
+                                        < StyledTableRow key={index} sx={{ cursor: 'pointer' }} onClick={() => handleFindStudentByMssv(item.mssv)} >
+                                            <StyledTableCell component="th" scope="row">
+                                                {item.mssv}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="left">{item.name}</StyledTableCell>
+                                            <StyledTableCell align="left">{item.is_compare ? <CheckCircleIcon color='success' /> : <CancelIcon color='error' />}</StyledTableCell>
+                                        </StyledTableRow>
+                                    )
+                                })
 
                         }
-                        {emptyRows > 0 && (
-                            <TableRow style={{ height: 53 * emptyRows }}>
-                                <TableCell colSpan={6} />
-                            </TableRow>
-                        )}
                     </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                colSpan={3}
-                                count={data_list_student.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                SelectProps={{
-                                    inputProps: {
-                                        'aria-label': 'rows per page',
-                                    },
-                                    native: true,
-                                }}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                ActionsComponent={TablePaginationActions}
-                            />
-                        </TableRow>
-                    </TableFooter>
                 </Table>
             </TableContainer >
+            <Stack sx={{ width: '100%', padding: '32px' }} direction='row' alignItems='center' justifyContent='flex-end'>
+                <Box sx={{ padding: '0 8px' }}>
+                    <Typography sx={{ fontSize: "14px" }}>{data_list_student.page} of {data_list_student.end_page}</Typography>
+                </Box>
+                <Box sx={{ padding: '0 8px' }}>
+                    <Button disabled={data_list_student.page === data_list_student.start_page ? true : false}><ArrowBackIosNewIcon onClick={() => handlePrevPage()} sx={{ fontSize: "13px" }} /></Button>
+                    <Typography sx={{ display: 'inline-block' }}>|</Typography>
+                    <Button disabled={data_list_student.page === data_list_student.end_page ? true : false}><ArrowForwardIosIcon onClick={() => handleNextPage()} sx={{ fontSize: "13px" }} /></Button>
+                </Box>
+                <Box sx={{ padding: '0 8px' }}>
+                    <Typography sx={{ fontSize: "14px" }}>Total: {data_list_student.total}</Typography>
+                </Box>
+            </Stack>
+
         </Box>
     )
 }

@@ -37,7 +37,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Typography sx={{ fontSize: '1.1em', color: 'yellow' }}>HỆ THỐNG ĐĂNG KÝ BẢO LƯU ĐIỂM QUÁ TRÌNH</Typography>
+                    <Typography sx={{ fontSize: '1.1em', color: 'yellow' }}>HỆ THỐNG KIỂM TRA DATABASE</Typography>
                     <MenuNavBar />
                 </div>
             </Stack >

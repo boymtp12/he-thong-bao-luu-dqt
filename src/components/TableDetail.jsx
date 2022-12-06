@@ -49,6 +49,7 @@ const TableDetail = () => {
 
 
     const rows = data_student?.compare;
+    console.log(rows)
     return (
         <div style={{ margin: '32px 0' }}>
             <Stack direction='row' justifyContent='flex-start' sx={{ width: '1000px' }}>
@@ -56,12 +57,12 @@ const TableDetail = () => {
                 <DetailSummary />
             </Stack>
             {
-                rows ? < StyledTableRow  >
+                !rows ? < StyledTableRow  >
                     None
                 </StyledTableRow> :
                     rows.map((row, index1) => (
                         <div key={index1}>
-                            <Box sx={{ marginTop: '32px' }}><Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>HỌC KỲ {row.hk} NĂM {row.year} - {Number(row.year) + 1}</Typography></Box>
+                            <Box sx={{ marginTop: '32px' }}><Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>HỌC KỲ {row.hk} NĂM {row.year} - {Number(row.year) + 1}</Typography></Box>
                             <TableContainer component={Paper} sx={{ marginTop: '16px' }}>
                                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                                     <TableHead>
@@ -122,83 +123,93 @@ const TableDetail = () => {
 
                                 </Table>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #ccc' }}>
-                                    <Stack sx={{ padding: '8px 16px' }}>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 10/100: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.summary}</Typography>
-                                            </div>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderRight: '1px solid #ccc' }}>
+                                        <Stack sx={{ padding: '8px 16px', borderRight: '1px solid #ccc' }}>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình học kỳ hệ 10/100: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>{row.semester_summary?.info_old?.summary}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình học kỳ hệ 4: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>{row.semester_summary?.info_old?.score_4}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình tích lũy: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>{row.semester_summary?.info_old?.summary_all}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình tích lũy(hệ 4): </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>{row.semester_summary?.info_old?.score_4_all}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Số tín chỉ đạt: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>{row.semester_summary?.info_old?.tcck}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Số tín chỉ tích lũy: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580' }}>{row.semester_summary?.info_old?.tcc}</Typography>
+                                                </div>
+                                            </Box>
+                                        </Stack>
+                                        <Box>
+                                            {row.semester_summary?.is_compare === true ? <CheckCircleIcon color='success' sx={{ padding: '8px 16px' }} /> : < CancelIcon color='error' sx={{ padding: '8px 16px' }} />}
                                         </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 4: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.score_4}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình tích lũy: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.summary_all}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình tích lũy(hệ 4): </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.score_4_all}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Số tín chỉ đạt: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.tcck}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Số tín chỉ tích lũy: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>{row.semester_summary?.info_old?.tcc}</Typography>
-                                            </div>
-                                        </Box>
-                                    </Stack>
+                                    </Box>
 
-                                    <Stack sx={{ padding: '8px 16px' }}>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 10/100: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.summary}</Typography>
-                                            </div>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderRight: '1px solid #ccc' }}>
+                                        <Stack sx={{ padding: '8px 16px', borderRight: '1px solid #ccc' }}>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình học kỳ hệ 10/100: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580', marginLeft: '32px' }}>{row.semester_summary?.info_new?.summary}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình học kỳ hệ 4: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580', marginLeft: '32px' }}>{row.semester_summary?.info_new?.score_4}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình tích lũy: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580', marginLeft: '32px' }}>{row.semester_summary?.info_new?.summary_all}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Điểm trung bình tích lũy(hệ 4): </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580', marginLeft: '32px' }}>{row.semester_summary?.info_new?.score_4_all}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Số tín chỉ đạt: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580', marginLeft: '32px' }}>{row.semester_summary?.info_new?.tcck}</Typography>
+                                                </div>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '350px', padding: '4px 0' }}>
+                                                <Typography sx={{ fontWeight: '400', fontSize: '0.85rem', color: '#667580;' }}>Số tín chỉ tích lũy: </Typography>
+                                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
+                                                    <Typography sx={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#667580', marginLeft: '32px' }}>{row.semester_summary?.info_new?.tcc}</Typography>
+                                                </div>
+                                            </Box>
+                                        </Stack>
+                                        <Box>
+                                            {row.semester_summary?.is_compare === true ? <CheckCircleIcon color='success' sx={{ padding: '8px 16px' }} /> : < CancelIcon color='error' sx={{ padding: '8px 16px' }} />}
                                         </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình học kỳ hệ 4: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.score_4}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình tích lũy: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.summary_all}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Điểm trung bình tích lũy(hệ 4): </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.score_4_all}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Số tín chỉ đạt: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.tcck}</Typography>
-                                            </div>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '500px', padding: '4px 0', borderBottom: '1px solid #ccc' }}>
-                                            <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>Số tín chỉ tích lũy: </Typography>
-                                            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', alignItem: 'center' }}>
-                                                <Typography sx={{ fontWeight: 'bold', fontSize: '14px', marginLeft: '32px' }}>{row.semester_summary?.info_new?.tcc}</Typography>
-                                            </div>
-                                        </Box>
-                                    </Stack>
+                                    </Box>
                                 </div>
                             </TableContainer >
                         </div>

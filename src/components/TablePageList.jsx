@@ -29,7 +29,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
-
 const TablePageList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -37,10 +36,10 @@ const TablePageList = () => {
     const ma_so_sv = useSelector(state => state.base.ma_so_sv)
     const data_student = useSelector(state => state.base.data_student)
     const is_display_table_detail = useSelector(state => state.base.is_display_table_detail)
+    
+    const [page, setPage] = React.useState(0);
+    const pageRef = React.useRef(0)
 
-    const [page, setPage] = React.useState(data_list_student.page);
-
-    console.log(data_list_student)
     const compare_list_student = data_list_student?.compare;
     // Avoid a layout jump when reaching the last page with empty rows.
 
@@ -109,6 +108,7 @@ const TablePageList = () => {
     }
     // }
     const getListStudent = (page) => {
+        console.log(page)
         const options = {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
@@ -118,13 +118,12 @@ const TablePageList = () => {
         dispatch(changeStatusProgress(true))
         fetch(`http://localhost:8088/sinh-vien/get-all?page=${page}`, options)
             .then(response => {
-                console.log(response)
                 return response.json();
             })
             .then(rs2 => {
                 if (Boolean(rs2) === true) {
-                    let data = rs2.result.compare;
-                    dispatch(changeDataListStudent([...data]))
+                    let data = rs2.result;
+                    dispatch(changeDataListStudent({...data}))
                 }
             }).catch(err => {
                 console.log(err)
@@ -134,15 +133,18 @@ const TablePageList = () => {
             })
     }
     const handlePrevPage = () => {
-        setPage(prev => prev - 1)
+        // pageRef.current = pageRef.current - 1;
+        // getListStudent(pageRef.current)
+        setPage(page -1)
         getListStudent(page - 1)
     }
 
     const handleNextPage = () => {
-        setPage(prev => prev + 1)
+        setPage(page + 1)
         getListStudent(page + 1)
+        // pageRef.current = pageRef.current + 1;
+        // getListStudent(pageRef.current)
     }
-
 
     return (
         <Box sx={{ margin: '0 auto' }}>
@@ -153,7 +155,7 @@ const TablePageList = () => {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell sx={{ minWidth: '50px' }} align="left">MSSV</StyledTableCell>
-                            <StyledTableCell sx={{ minWidth: '200px' }} align="left">Họ tên</StyledTableCell>
+                            <StyledTableCell sx={{ minWidth: '200px' }} align="left">Nội dung</StyledTableCell>
                             <StyledTableCell sx={{ minWidth: '100px' }} align="left">Trạng thái</StyledTableCell>
                         </TableRow>
                     </TableHead>
@@ -183,9 +185,9 @@ const TablePageList = () => {
                     <Typography sx={{ fontSize: "14px" }}>{data_list_student.page} of {data_list_student.end_page}</Typography>
                 </Box>
                 <Box sx={{ padding: '0 8px' }}>
-                    <Button disabled={data_list_student.page === data_list_student.start_page ? true : false}><ArrowBackIosNewIcon onClick={() => handlePrevPage()} sx={{ fontSize: "13px" }} /></Button>
+                    <Button onClick={() => handlePrevPage()} disabled={data_list_student.page === data_list_student.start_page ? true : false}><ArrowBackIosNewIcon   sx={{ fontSize: "13px" }} /></Button>
                     <Typography sx={{ display: 'inline-block' }}>|</Typography>
-                    <Button disabled={data_list_student.page === data_list_student.end_page ? true : false}><ArrowForwardIosIcon onClick={() => handleNextPage()} sx={{ fontSize: "13px" }} /></Button>
+                    <Button onClick={() => handleNextPage()} disabled={data_list_student.page === data_list_student.end_page ? true : false}><ArrowForwardIosIcon sx={{ fontSize: "13px" }} /></Button>
                 </Box>
                 <Box sx={{ padding: '0 8px' }}>
                     <Typography sx={{ fontSize: "14px" }}>Total: {data_list_student.total}</Typography>

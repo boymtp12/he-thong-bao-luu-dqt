@@ -35,7 +35,7 @@ const UploadFileAll = () => {
             })
     }
     return (
-        <Button variant="outlined">All</Button>
+        <Button variant="outlined" onClick={() => handleSubmit()}>All</Button>
     )
 }
 

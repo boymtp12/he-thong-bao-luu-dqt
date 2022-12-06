@@ -5,6 +5,7 @@ import { OutTable, ExcelRenderer } from 'react-excel-renderer'
 import { toast } from 'react-toastify';
 import { changeStatusProgress } from '../reducer_action/BaseReducerAction';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const UploadFile = () => {
     const dispatch = useDispatch();
@@ -12,40 +13,44 @@ const UploadFile = () => {
     const [file, setFile] = useState();
 
     const fileHandler = async event => {
-        const fileObj = event.target.files[0]
-        setUploading(true);
+        setUploading(true)
         const formData = new FormData();
-        formData.append('File', fileObj);
 
-        console.log(formData)
+        const fileObj = event.target.files[0]
+        setFile(fileObj)
+        formData.append('file', fileObj);
+
         dispatch(changeStatusProgress(true))
         const options = {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'    
             },
-            body: JSON.stringify(formData)
+            body: formData
         }
-        fetch(`http://localhost:8088/sinh-vien/compare-file`, options)
-            .then(response => {
-                console.log(response)
-                return response.json();
+
+        axios({
+            method: "post",
+            url: "http://localhost:8088/sinh-vien/compare-file",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+            .then(function (response) {
+                console.log("Upload file: ", response.data.message);
+              //handle success
+                toast.success(`Notification: ${response.data.message}`)
             })
-            .then(rs => {
-                toast.success("Upload file thành công!")
-            })
-            .catch(err => {
-                toast.error("Upload file không thành công")
+            .catch(function (response) {
+                console.log("Upload failse file: ", response);
+              //handle error
+                toast.error(`Notification: ${response.data.message}`)
             })
             .finally(() => {
+                setUploading(false)
                 dispatch(changeStatusProgress(false))
-                setUploading(false);
             })
-    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
+        
     }
 
     return (

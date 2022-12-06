@@ -13,7 +13,7 @@ const Home = () => {
     const is_display_table_detail = useSelector(state => state.base.is_display_table_detail)
 
     return (
-        < Box sx={{ minHeight: '750px', marginTop: '110px', padding: '32px 64px' }}>
+        < Box sx={{ margin: '110px 0', padding: '32px 64px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <SearchBar />
                 <UploadFile />

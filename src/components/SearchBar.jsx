@@ -97,7 +97,7 @@ const SearchBar = () => {
                         className='search-bar'
                         placeholder='Mã số sinh viên *'
                         value={ma_so_sv}
-                        onChange={e => dispatch(changeMaSoSv(e.target.value))}
+                        onChange={e => dispatch(changeMaSoSv(e.target.value.trim()))}
                         style={{ border: 'none', outline: 'none', padding: '4px 8px', fontWeight: 'bold', color: '#696969' }}
                     />
                 </div>

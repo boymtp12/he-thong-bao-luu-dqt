@@ -83,7 +83,7 @@ const TablePageList = () => {
                         let data = rs.result;
                         checkMaSoSv1 = rs.result.mssv
                         console.log(checkMaSoSv1)
-                        dispatch(changeMaSoSv(mssv))
+                        dispatch(changeMaSoSv(mssv.trim()))
                         if (mssv === checkMaSoSv1) {
                             navigate('/')
                             dispatch(changeDataStudent({ ...data }));
